@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using Xunit;
 
 namespace TicTacToe_Calisthenics
@@ -28,7 +27,7 @@ namespace TicTacToe_Calisthenics
             };
 
             Game game = new Game();
-            game.Play();
+            game.Play(4);
             var resultBoard = game.Render();
 
             Assert.Equal(expectedBoard, resultBoard);
@@ -45,35 +44,20 @@ namespace TicTacToe_Calisthenics
             };
 
             Game game = new Game();
-            game.Play();
-            game.Play();
+            game.Play(4);
+            game.Play(5);
             var resultBoard = game.Render();
 
             Assert.Equal(expectedBoard, resultBoard);
         }
-    }
 
-    public class Game
-    {
-        private string[] board = new string[] {
-            String.Empty, String.Empty, String.Empty,
-            String.Empty, String.Empty, String.Empty,
-            String.Empty, String.Empty, String.Empty,
-        };
-
-        public IEnumerable<string> Render()
+        [Fact]
+        public void throw_exception_when_position_is_occupied()
         {
-            return board;
-        }
+            Game game = new Game();
+            game.Play(4);
 
-        public void Play()
-        {
-            board = new string[]
-            {
-                String.Empty, String.Empty, String.Empty,
-                String.Empty, "X", String.Empty,
-                String.Empty, String.Empty, String.Empty,
-            };
+            Assert.Throws<InvalidOperationException>(() => game.Play(4));
         }
     }
 }
