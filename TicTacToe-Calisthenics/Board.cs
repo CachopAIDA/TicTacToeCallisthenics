@@ -37,7 +37,7 @@ namespace TicTacToe_Calisthenics
                 this.mark = mark;
             }
 
-            public bool CheckPlayer ( string player )
+            private bool CheckPlayer ( string player )
             {
                 return mark == player;
             }
@@ -47,9 +47,14 @@ namespace TicTacToe_Calisthenics
                 return mark;
             }
 
-            public bool IsInLine(Line line)
+            private bool IsInLine(Line line)
             {
                 return this.lines.Contains(line);
+            }
+
+            public bool CheckPlayerInLine(string player, Line line)
+            {
+                return CheckPlayer(player) && IsInLine(line);
             }
         }
 
@@ -84,20 +89,28 @@ namespace TicTacToe_Calisthenics
         public bool CheckTicTacToe(string player)
         {
             return CheckHorizontals(player)  ||
-                   CheckDiagonals(player) ;
+                   CheckDiagonals(player) ||
+                   CheckVertical(player);
         }
 
         private bool CheckHorizontals(string player)
         {
-            return board.Count(cell => cell.CheckPlayer(player) && cell.IsInLine(Cell.Line.HorizontalTop)) == 3 ||
-                   board.Count(cell => cell.CheckPlayer(player) && cell.IsInLine(Cell.Line.HorizontalCenter)) == 3 ||
-                   board.Count(cell => cell.CheckPlayer(player) && cell.IsInLine(Cell.Line.HorizontalBottom)) == 3;
+            return board.Count(cell => cell.CheckPlayerInLine(player, Cell.Line.HorizontalTop)) == 3 ||
+                   board.Count(cell => cell.CheckPlayerInLine(player, Cell.Line.HorizontalBottom)) == 3 ||
+                   board.Count(cell => cell.CheckPlayerInLine(player, Cell.Line.HorizontalCenter)) == 3;
         }
 
         private bool CheckDiagonals(string player)
         {
-            return board.Count(cell => cell.CheckPlayer(player) && cell.IsInLine(Cell.Line.DiagonalLeft)) == 3 ||
-                   board.Count(cell => cell.CheckPlayer(player) && cell.IsInLine(Cell.Line.DiagonalRight)) == 3;
+            return board.Count(cell => cell.CheckPlayerInLine(player, Cell.Line.DiagonalLeft)) == 3 ||
+                   board.Count(cell => cell.CheckPlayerInLine(player, Cell.Line.DiagonalRight)) == 3;
+        }
+
+        private bool CheckVertical(string player)
+        {
+            return board.Count(cell => cell.CheckPlayerInLine(player, Cell.Line.VerticalCenter)) == 3 ||
+                   board.Count(cell => cell.CheckPlayerInLine(player, Cell.Line.VerticalLeft)) == 3 ||
+                   board.Count(cell => cell.CheckPlayerInLine(player, Cell.Line.VerticalRight)) == 3;
         }
     }
 }
