@@ -88,29 +88,14 @@ namespace TicTacToe_Calisthenics
 
         public bool CheckTicTacToe(string player)
         {
-            return CheckHorizontals(player)  ||
-                   CheckDiagonals(player) ||
-                   CheckVertical(player);
+            foreach (Cell.Line cellLine in Enum.GetValues(typeof(Cell.Line)))
+            {
+                if (board.Count(cell => cell.CheckPlayerInLine(player, cellLine)) == 3)
+                    return true;
+            }
+
+            return false;
         }
 
-        private bool CheckHorizontals(string player)
-        {
-            return board.Count(cell => cell.CheckPlayerInLine(player, Cell.Line.HorizontalTop)) == 3 ||
-                   board.Count(cell => cell.CheckPlayerInLine(player, Cell.Line.HorizontalBottom)) == 3 ||
-                   board.Count(cell => cell.CheckPlayerInLine(player, Cell.Line.HorizontalCenter)) == 3;
-        }
-
-        private bool CheckDiagonals(string player)
-        {
-            return board.Count(cell => cell.CheckPlayerInLine(player, Cell.Line.DiagonalLeft)) == 3 ||
-                   board.Count(cell => cell.CheckPlayerInLine(player, Cell.Line.DiagonalRight)) == 3;
-        }
-
-        private bool CheckVertical(string player)
-        {
-            return board.Count(cell => cell.CheckPlayerInLine(player, Cell.Line.VerticalCenter)) == 3 ||
-                   board.Count(cell => cell.CheckPlayerInLine(player, Cell.Line.VerticalLeft)) == 3 ||
-                   board.Count(cell => cell.CheckPlayerInLine(player, Cell.Line.VerticalRight)) == 3;
-        }
     }
 }
