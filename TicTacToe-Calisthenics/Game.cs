@@ -30,5 +30,10 @@ namespace TicTacToe_Calisthenics
         {
             player = player == "X" ? "O" : "X";
         }
+
+        internal string Winner()
+        {
+            return player == "X" ? "O" : "X";
+        }
     }
 }
