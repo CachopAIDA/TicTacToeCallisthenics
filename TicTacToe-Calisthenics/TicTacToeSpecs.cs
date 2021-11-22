@@ -116,5 +116,20 @@ namespace TicTacToe_Calisthenics
 
             Assert.Equal(winnerExpected, game.Winner());
         }
+
+        [Fact]
+        public void playerX_wins_with_diagonal()
+        {
+            var winnerExpected = "X";
+
+            game.Play(4);
+            game.Play(5);
+            game.Play(8);
+            game.Play(2);
+            game.Play(0);
+
+            Assert.Equal(winnerExpected, game.Winner());
+        }
+
     }
 }
