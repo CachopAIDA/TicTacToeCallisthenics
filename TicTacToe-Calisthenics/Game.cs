@@ -10,6 +10,7 @@ namespace TicTacToe_Calisthenics
     {
         private          Player player = Player.X;
         private readonly Board  board  = new Board();
+        private Player? winner;
 
 
         private sealed class Player
@@ -36,6 +37,11 @@ namespace TicTacToe_Calisthenics
         internal void Play ( short position )
         {
             board.Mark( position, player.ToString() );
+            if (board.CheckTicTacToe(player.ToString()))
+            {
+                winner = player;
+                return;
+            }
             ChangePlayer();
         }
 
@@ -55,9 +61,7 @@ namespace TicTacToe_Calisthenics
             if (board.Render().
                 Count(cell => cell != string.Empty) == 9)
                 return string.Empty;
-            return player == Player.X
-                    ? Player.O.ToString()
-                    : Player.X.ToString();
+            return winner?.ToString() ?? string.Empty;
         }
     }
 }

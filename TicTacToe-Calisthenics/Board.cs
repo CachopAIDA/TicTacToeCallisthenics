@@ -21,5 +21,11 @@ namespace TicTacToe_Calisthenics
             if (!String.IsNullOrEmpty(this.board[position])) throw new InvalidOperationException();
             this.board[position] = player;
         }
+
+        public bool CheckTicTacToe(string player)
+        {
+            return false;
+        }
+
     }
 }
