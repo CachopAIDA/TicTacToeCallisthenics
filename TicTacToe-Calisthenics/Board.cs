@@ -24,11 +24,21 @@ namespace TicTacToe_Calisthenics
 
         public bool CheckTicTacToe(string player)
         {
-            return !string.IsNullOrEmpty(board[0]) && board[0] == board[1] && board[0] == board[2] ||
-                   !string.IsNullOrEmpty(board[3]) && board[3] == board[4] && board[4] == board[5] ||
-                   !string.IsNullOrEmpty(board[6]) && board[6] == board[7] && board[7] == board[8] ||
-                   !string.IsNullOrEmpty(board[0]) && board[0] == board[4] && board[4] == board[8];
+            return CheckHorizontals()  ||
+                   CheckDiagonals() ;
         }
 
+        private bool CheckHorizontals()
+        {
+            return !string.IsNullOrEmpty(board[0]) && board[0] == board[1] && board[0] == board[2] ||
+                   !string.IsNullOrEmpty(board[3]) && board[3] == board[4] && board[4] == board[5] ||
+                   !string.IsNullOrEmpty(board[6]) && board[6] == board[7] && board[7] == board[8];
+        }
+
+        private bool CheckDiagonals()
+        {
+            return !string.IsNullOrEmpty(board[4]) && board[4] == board[2] && board[2] == board[6] ||
+                   !string.IsNullOrEmpty(board[0]) && board[0] == board[4] && board[4] == board[8];
+        }
     }
 }
