@@ -6,13 +6,13 @@ namespace TicTacToe_Calisthenics
 {
     public class Game
     {
-        private string player = "X";
+        private Player player = Player.player1;
         private readonly Board board = new Board();
 
         private enum Player
         {
-            playerX = 'X',
-            playerO = 'O'
+            player1 = 'X',
+            player2 = 'O'
         }
 
         public IEnumerable<string> Render()
@@ -22,18 +22,18 @@ namespace TicTacToe_Calisthenics
 
         public void Play(short position)
         {
-            board.Mark(position, player);
+            board.Mark(position, ((char)player).ToString());
             ChangePlayer();
         }
 
         private void ChangePlayer()
         {
-            player = player == "X" ? "O" : "X";
+            player = player == Player.player1 ? Player.player2 : Player.player1;
         }
 
         internal string Winner()
         {
-            return player == "X" ? "O" : "X";
+            return ((char)(player == Player.player1 ? Player.player2 : Player.player1)).ToString();
         }
     }
 }
