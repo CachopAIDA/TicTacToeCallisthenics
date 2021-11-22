@@ -5,6 +5,47 @@ namespace TicTacToe_Calisthenics
 {
     public class Board
     {
+        private class Cell
+        {
+            public virtual bool CheckPlayer ( string player )
+            {
+                return false;
+            }
+
+            public override String ToString ()
+            {
+                return String.Empty;
+            }
+        }
+
+
+        private class CellX : Cell
+        {
+            public override bool CheckPlayer ( string player )
+            {
+                return player == "X";
+            }
+
+            public override String ToString ()
+            {
+                return "X";
+            }
+        }
+
+
+        private class CellO : Cell
+        {
+            public override Boolean CheckPlayer ( String player )
+            {
+                return player == "O";
+            }
+
+            public override String ToString ()
+            {
+                return "O";
+            }
+        }
+
         private string[] board = new[] {
             String.Empty, String.Empty, String.Empty,
             String.Empty, String.Empty, String.Empty,
