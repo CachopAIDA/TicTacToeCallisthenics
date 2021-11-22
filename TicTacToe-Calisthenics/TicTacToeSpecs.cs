@@ -87,5 +87,34 @@ namespace TicTacToe_Calisthenics
 
             Assert.Equal(winnerExpected, game.Winner());
         }
+
+        [Fact]
+        public void after_two_movement_no_players_wins_game()
+        {
+            var winnerExpected = string.Empty;
+
+            game.Play(4);
+            game.Play(0);
+
+            Assert.Equal(winnerExpected, game.Winner());
+        }
+
+        [Fact]
+        public void after_nine_movement_no_players_wins_game()
+        {
+            var winnerExpected = string.Empty;
+
+            game.Play(4);
+            game.Play(0);
+            game.Play(3);
+            game.Play(6);
+            game.Play(1);
+            game.Play(5);
+            game.Play(2);
+            game.Play(7);
+            game.Play(8);
+
+            Assert.Equal(winnerExpected, game.Winner());
+        }
     }
 }

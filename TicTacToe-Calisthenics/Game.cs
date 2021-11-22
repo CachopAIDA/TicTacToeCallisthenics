@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Xunit.Sdk;
 
 
@@ -48,10 +49,15 @@ namespace TicTacToe_Calisthenics
 
         internal string Winner ()
         {
+            if (board.Render().
+                Count(cell => cell != string.Empty) < 5) 
+                return string.Empty;
+            if (board.Render().
+                Count(cell => cell != string.Empty) == 9)
+                return string.Empty;
             return player == Player.X
                     ? Player.O.ToString()
                     : Player.X.ToString();
-            // return ((char) (player == Player.player1 ? Player.player2 : Player.player1)).ToString();
         }
     }
 }
