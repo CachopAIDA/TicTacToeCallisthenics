@@ -6,23 +6,23 @@ namespace TicTacToe_Calisthenics
 {
     public class Game
     {
-        private string[] board = new string[] {
-            String.Empty, String.Empty, String.Empty,
-            String.Empty, String.Empty, String.Empty,
-            String.Empty, String.Empty, String.Empty,
-        };
-
         private string player = "X";
+        private readonly Board board = new Board();
+
+        private enum Player
+        {
+            playerX = 'X',
+            playerO = 'O'
+        }
 
         public IEnumerable<string> Render()
         {
-            return board;
+            return board.Render();
         }
 
         public void Play(short position)
         {
-            if (!String.IsNullOrEmpty(board[position])) throw new InvalidOperationException();
-            board[position] = player;
+            board.Mark(position, player);
             ChangePlayer();
         }
 

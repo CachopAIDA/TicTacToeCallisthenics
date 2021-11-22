@@ -1,12 +1,11 @@
 using System;
-using System.Collections.Generic;
 using Xunit;
 
 namespace TicTacToe_Calisthenics
 {
     public class TicTacToeSpecs
     {
-        private IEnumerable<object> winnerExpected;
+        private readonly Game game = new Game();
 
         [Fact]
         public void game_starts_with_an_empty_board()
@@ -15,7 +14,7 @@ namespace TicTacToe_Calisthenics
                                                String.Empty, String.Empty, String.Empty, 
                                                String.Empty, String.Empty, String.Empty,
             };
-            var startingBoard = new Game().Render();
+            var startingBoard = game.Render();
             Assert.Equal(expectedBoard, startingBoard);
         }
 
@@ -29,7 +28,6 @@ namespace TicTacToe_Calisthenics
                 String.Empty, String.Empty, String.Empty,
             };
 
-            Game game = new Game();
             game.Play(4);
             var resultBoard = game.Render();
 
@@ -46,7 +44,6 @@ namespace TicTacToe_Calisthenics
                 String.Empty, String.Empty, String.Empty,
             };
 
-            Game game = new Game();
             game.Play(4);
             game.Play(5);
             var resultBoard = game.Render();
@@ -57,7 +54,6 @@ namespace TicTacToe_Calisthenics
         [Fact]
         public void throw_exception_when_position_is_occupied()
         {
-            Game game = new Game();
             game.Play(4);
 
             Assert.Throws<InvalidOperationException>(() => game.Play(4));
@@ -68,7 +64,6 @@ namespace TicTacToe_Calisthenics
         {
             var winnerExpected = "X";
 
-            Game game = new Game();
             game.Play(4);
             game.Play(0);
             game.Play(5);
@@ -83,7 +78,6 @@ namespace TicTacToe_Calisthenics
         {
             var winnerExpected = "O";
 
-            Game game = new Game();
             game.Play(4);
             game.Play(0);
             game.Play(5);
