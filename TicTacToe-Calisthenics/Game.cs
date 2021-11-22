@@ -2,38 +2,56 @@ using System;
 using System.Collections.Generic;
 using Xunit.Sdk;
 
+
 namespace TicTacToe_Calisthenics
 {
-    public class Game
+    internal sealed class Game
     {
-        private Player player = Player.player1;
-        private readonly Board board = new Board();
+        private          Player player = Player.X;
+        private readonly Board  board  = new Board();
 
-        private enum Player
+
+        private sealed class Player
         {
-            player1 = 'X',
-            player2 = 'O'
+            private readonly string id;
+
+            public static Player X = new Player ( "X" );
+            public static Player O = new Player( "O" );
+
+            private Player ( string id )
+            {
+                this.id = id;
+            }
+
+            public override String ToString () => this.id;
         }
 
-        public IEnumerable<string> Render()
+
+        internal IEnumerable<string> Render ()
         {
             return board.Render();
         }
 
-        public void Play(short position)
+        internal void Play ( short position )
         {
-            board.Mark(position, ((char)player).ToString());
+            board.Mark( position, player.ToString() );
             ChangePlayer();
         }
 
-        private void ChangePlayer()
+        private void ChangePlayer ()
         {
-            player = player == Player.player1 ? Player.player2 : Player.player1;
+            player =
+                    player == Player.X
+                            ? Player.O
+                            : Player.X;
         }
 
-        internal string Winner()
+        internal string Winner ()
         {
-            return ((char)(player == Player.player1 ? Player.player2 : Player.player1)).ToString();
+            return player == Player.X
+                    ? Player.O.ToString()
+                    : Player.X.ToString();
+            // return ((char) (player == Player.player1 ? Player.player2 : Player.player1)).ToString();
         }
     }
 }
